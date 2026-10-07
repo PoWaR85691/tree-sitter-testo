@@ -55,6 +55,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "angle_specifier"
+        },
+        {
+          "type": "SYMBOL",
           "name": "number"
         },
         {
@@ -149,6 +153,10 @@
                 "name": "interpolation"
               },
               {
+                "type": "STRING",
+                "value": "$${"
+              },
+              {
                 "type": "PATTERN",
                 "value": "[^\"\\\\$]+"
               },
@@ -188,6 +196,10 @@
               {
                 "type": "SYMBOL",
                 "name": "interpolation"
+              },
+              {
+                "type": "STRING",
+                "value": "$${"
               },
               {
                 "type": "PATTERN",
@@ -316,9 +328,45 @@
       "type": "PATTERN",
       "value": "\\d+(\\.\\d+)?[KkMmGg]b"
     },
+    "angle_specifier": {
+      "type": "PATTERN",
+      "value": "\\d+(\\.\\d+)?deg"
+    },
     "control_keyword": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "STRING",
+          "value": "machine"
+        },
+        {
+          "type": "STRING",
+          "value": "flash"
+        },
+        {
+          "type": "STRING",
+          "value": "network"
+        },
+        {
+          "type": "STRING",
+          "value": "param"
+        },
+        {
+          "type": "STRING",
+          "value": "image"
+        },
+        {
+          "type": "STRING",
+          "value": "test"
+        },
+        {
+          "type": "STRING",
+          "value": "macro"
+        },
+        {
+          "type": "STRING",
+          "value": "include"
+        },
         {
           "type": "STRING",
           "value": "if"
@@ -333,15 +381,11 @@
         },
         {
           "type": "STRING",
-          "value": "while"
+          "value": "IN"
         },
         {
           "type": "STRING",
-          "value": "do"
-        },
-        {
-          "type": "STRING",
-          "value": "switch"
+          "value": "RANGE"
         },
         {
           "type": "STRING",
@@ -350,44 +394,136 @@
         {
           "type": "STRING",
           "value": "continue"
-        },
-        {
-          "type": "STRING",
-          "value": "include"
-        },
-        {
-          "type": "STRING",
-          "value": "test"
-        },
-        {
-          "type": "STRING",
-          "value": "macro"
-        },
-        {
-          "type": "STRING",
-          "value": "param"
-        },
-        {
-          "type": "STRING",
-          "value": "image"
-        },
-        {
-          "type": "STRING",
-          "value": "machine"
-        },
-        {
-          "type": "STRING",
-          "value": "flash"
-        },
-        {
-          "type": "STRING",
-          "value": "network"
         }
       ]
     },
     "action_keyword": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "STRING",
+          "value": "start"
+        },
+        {
+          "type": "STRING",
+          "value": "stop"
+        },
+        {
+          "type": "STRING",
+          "value": "shutdown"
+        },
+        {
+          "type": "STRING",
+          "value": "snapshot"
+        },
+        {
+          "type": "STRING",
+          "value": "repl"
+        },
+        {
+          "type": "STRING",
+          "value": "screenshot"
+        },
+        {
+          "type": "STRING",
+          "value": "press"
+        },
+        {
+          "type": "STRING",
+          "value": "hold"
+        },
+        {
+          "type": "STRING",
+          "value": "release"
+        },
+        {
+          "type": "STRING",
+          "value": "type"
+        },
+        {
+          "type": "STRING",
+          "value": "mouse"
+        },
+        {
+          "type": "STRING",
+          "value": "move"
+        },
+        {
+          "type": "STRING",
+          "value": "click"
+        },
+        {
+          "type": "STRING",
+          "value": "lclick"
+        },
+        {
+          "type": "STRING",
+          "value": "rclick"
+        },
+        {
+          "type": "STRING",
+          "value": "dclick"
+        },
+        {
+          "type": "STRING",
+          "value": "lbtn"
+        },
+        {
+          "type": "STRING",
+          "value": "rbtn"
+        },
+        {
+          "type": "STRING",
+          "value": "wheel-up"
+        },
+        {
+          "type": "STRING",
+          "value": "wheel-down"
+        },
+        {
+          "type": "STRING",
+          "value": "touch"
+        },
+        {
+          "type": "STRING",
+          "value": "tap"
+        },
+        {
+          "type": "STRING",
+          "value": "doubletap"
+        },
+        {
+          "type": "STRING",
+          "value": "longpress"
+        },
+        {
+          "type": "STRING",
+          "value": "swipe"
+        },
+        {
+          "type": "STRING",
+          "value": "drag"
+        },
+        {
+          "type": "STRING",
+          "value": "pinchout"
+        },
+        {
+          "type": "STRING",
+          "value": "pinchin"
+        },
+        {
+          "type": "STRING",
+          "value": "twofingertap"
+        },
+        {
+          "type": "STRING",
+          "value": "twofingerswipe"
+        },
+        {
+          "type": "STRING",
+          "value": "rotate"
+        },
         {
           "type": "STRING",
           "value": "wait"
@@ -398,23 +534,43 @@
         },
         {
           "type": "STRING",
-          "value": "press"
-        },
-        {
-          "type": "STRING",
-          "value": "type"
-        },
-        {
-          "type": "STRING",
           "value": "sleep"
         },
         {
           "type": "STRING",
-          "value": "mouse"
+          "value": "timeout"
         },
         {
           "type": "STRING",
-          "value": "touch"
+          "value": "interval"
+        },
+        {
+          "type": "STRING",
+          "value": "plug"
+        },
+        {
+          "type": "STRING",
+          "value": "unplug"
+        },
+        {
+          "type": "STRING",
+          "value": "dvd"
+        },
+        {
+          "type": "STRING",
+          "value": "nic"
+        },
+        {
+          "type": "STRING",
+          "value": "link"
+        },
+        {
+          "type": "STRING",
+          "value": "hostdev"
+        },
+        {
+          "type": "STRING",
+          "value": "usb"
         },
         {
           "type": "STRING",
@@ -422,19 +578,11 @@
         },
         {
           "type": "STRING",
-          "value": "print"
+          "value": "copyto"
         },
         {
           "type": "STRING",
-          "value": "abort"
-        },
-        {
-          "type": "STRING",
-          "value": "screenshot"
-        },
-        {
-          "type": "STRING",
-          "value": "repl"
+          "value": "copyfrom"
         },
         {
           "type": "STRING",
@@ -462,67 +610,31 @@
         },
         {
           "type": "STRING",
-          "value": "plug"
+          "value": "add"
         },
         {
           "type": "STRING",
-          "value": "unplug"
+          "value": "remove"
         },
         {
           "type": "STRING",
-          "value": "start"
+          "value": "create"
         },
         {
           "type": "STRING",
-          "value": "stop"
+          "value": "revert"
         },
         {
           "type": "STRING",
-          "value": "shutdown"
+          "value": "print"
         },
         {
           "type": "STRING",
-          "value": "snapshot"
-        },
-        {
-          "type": "STRING",
-          "value": "copyto"
-        },
-        {
-          "type": "STRING",
-          "value": "copyfrom"
-        },
-        {
-          "type": "STRING",
-          "value": "hold"
-        },
-        {
-          "type": "STRING",
-          "value": "release"
+          "value": "abort"
         },
         {
           "type": "STRING",
           "value": "step"
-        },
-        {
-          "type": "STRING",
-          "value": "timeout"
-        },
-        {
-          "type": "STRING",
-          "value": "interval"
-        },
-        {
-          "type": "STRING",
-          "value": "scroll"
-        },
-        {
-          "type": "STRING",
-          "value": "over"
-        },
-        {
-          "type": "STRING",
-          "value": "scale"
         },
         {
           "type": "STRING",
@@ -539,6 +651,30 @@
         {
           "type": "STRING",
           "value": "sizelimit"
+        },
+        {
+          "type": "STRING",
+          "value": "over"
+        },
+        {
+          "type": "STRING",
+          "value": "scale"
+        },
+        {
+          "type": "STRING",
+          "value": "scroll"
+        },
+        {
+          "type": "STRING",
+          "value": "autoswitch"
+        },
+        {
+          "type": "STRING",
+          "value": "nocheck"
+        },
+        {
+          "type": "STRING",
+          "value": "active-window"
         }
       ]
     },
@@ -596,15 +732,11 @@
         },
         {
           "type": "STRING",
-          "value": "RANGE"
-        },
-        {
-          "type": "STRING",
-          "value": "IN"
-        },
-        {
-          "type": "STRING",
           "value": "DEFINED"
+        },
+        {
+          "type": "STRING",
+          "value": "EXIST"
         }
       ]
     },
@@ -725,7 +857,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[A-Za-z_][A-Za-z0-9_]*"
+      "value": "[A-Za-z_][A-Za-z0-9_-]*"
     }
   },
   "extras": [

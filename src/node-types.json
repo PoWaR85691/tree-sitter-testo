@@ -17,6 +17,10 @@
           "named": true
         },
         {
+          "type": "angle_specifier",
+          "named": true
+        },
+        {
           "type": "block",
           "named": true
         },
@@ -166,6 +170,10 @@
           "named": true
         },
         {
+          "type": "angle_specifier",
+          "named": true
+        },
+        {
           "type": "block",
           "named": true
         },
@@ -283,6 +291,10 @@
     "named": false
   },
   {
+    "type": "$${",
+    "named": false
+  },
+  {
     "type": "$<",
     "named": false
   },
@@ -367,6 +379,10 @@
     "named": false
   },
   {
+    "type": "EXIST",
+    "named": false
+  },
+  {
     "type": "GREATER",
     "named": false
   },
@@ -423,7 +439,23 @@
     "named": false
   },
   {
+    "type": "active-window",
+    "named": false
+  },
+  {
+    "type": "add",
+    "named": false
+  },
+  {
+    "type": "angle_specifier",
+    "named": true
+  },
+  {
     "type": "as",
+    "named": false
+  },
+  {
+    "type": "autoswitch",
     "named": false
   },
   {
@@ -440,6 +472,10 @@
   },
   {
     "type": "check",
+    "named": false
+  },
+  {
+    "type": "click",
     "named": false
   },
   {
@@ -463,7 +499,23 @@
     "named": false
   },
   {
-    "type": "do",
+    "type": "create",
+    "named": false
+  },
+  {
+    "type": "dclick",
+    "named": false
+  },
+  {
+    "type": "doubletap",
+    "named": false
+  },
+  {
+    "type": "drag",
+    "named": false
+  },
+  {
+    "type": "dvd",
     "named": false
   },
   {
@@ -499,6 +551,10 @@
     "named": false
   },
   {
+    "type": "hostdev",
+    "named": false
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -531,7 +587,23 @@
     "named": false
   },
   {
+    "type": "lbtn",
+    "named": false
+  },
+  {
+    "type": "lclick",
+    "named": false
+  },
+  {
     "type": "lid",
+    "named": false
+  },
+  {
+    "type": "link",
+    "named": false
+  },
+  {
+    "type": "longpress",
     "named": false
   },
   {
@@ -547,7 +619,19 @@
     "named": false
   },
   {
+    "type": "move",
+    "named": false
+  },
+  {
     "type": "network",
+    "named": false
+  },
+  {
+    "type": "nic",
+    "named": false
+  },
+  {
+    "type": "nocheck",
     "named": false
   },
   {
@@ -560,6 +644,14 @@
   },
   {
     "type": "param",
+    "named": false
+  },
+  {
+    "type": "pinchin",
+    "named": false
+  },
+  {
+    "type": "pinchout",
     "named": false
   },
   {
@@ -579,6 +671,14 @@
     "named": false
   },
   {
+    "type": "rbtn",
+    "named": false
+  },
+  {
+    "type": "rclick",
+    "named": false
+  },
+  {
     "type": "release",
     "named": false
   },
@@ -587,7 +687,19 @@
     "named": false
   },
   {
+    "type": "remove",
+    "named": false
+  },
+  {
     "type": "repl",
+    "named": false
+  },
+  {
+    "type": "revert",
+    "named": false
+  },
+  {
+    "type": "rotate",
     "named": false
   },
   {
@@ -635,7 +747,11 @@
     "named": false
   },
   {
-    "type": "switch",
+    "type": "swipe",
+    "named": false
+  },
+  {
+    "type": "tap",
     "named": false
   },
   {
@@ -659,6 +775,14 @@
     "named": false
   },
   {
+    "type": "twofingerswipe",
+    "named": false
+  },
+  {
+    "type": "twofingertap",
+    "named": false
+  },
+  {
     "type": "type",
     "named": false
   },
@@ -671,11 +795,19 @@
     "named": false
   },
   {
+    "type": "usb",
+    "named": false
+  },
+  {
     "type": "wait",
     "named": false
   },
   {
-    "type": "while",
+    "type": "wheel-down",
+    "named": false
+  },
+  {
+    "type": "wheel-up",
     "named": false
   },
   {

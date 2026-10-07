@@ -9,6 +9,11 @@
  * Blocks ({ ... }) are the only structural construct: they nest, which is
  * enough for bracket matching (brackets.scm) and auto indentation
  * (indents.scm).
+ *
+ * The token set follows the Testo language specification (see the upstream
+ * documentation: top level declarations `machine`/`flash`/`network`/`param`/
+ * `image`/`test`/`macro`/`include`, the literals in "Базовые конструкции
+ * языка" and the action/condition/loop syntaex in the "Спецификация").
  */
 module.exports = grammar({
   name: 'testo',
@@ -31,6 +36,7 @@ module.exports = grammar({
       $.string,
       $.time_interval,
       $.size_specifier,
+      $.angle_specifier,
       $.number,
       $.boolean,
       $.variable,
@@ -57,6 +63,7 @@ module.exports = grammar({
       repeat(choice(
         $.escape_sequence,
         $.interpolation,
+        '$${',
         /[^"\\$]+/,
         '"',
         '$',
@@ -64,12 +71,14 @@ module.exports = grammar({
       '"""',
     ),
 
-    // Double quoted strings. `${PARAM}` and `$<VAR>` are interpolated.
+    // Double quoted strings. `${PARAM}` and `$<VAR>` are interpolated,
+    // `$${` is an escaped literal `${` (see "Обращение к параметрам").
     string: $ => seq(
       '"',
       repeat(choice(
         $.escape_sequence,
         $.interpolation,
+        '$${',
         /[^"\\$]+/,
         '$',
       )),
@@ -97,26 +106,52 @@ module.exports = grammar({
     // so the unit suffix is matched without a word boundary. The lexer still
     // prefers these tokens over `number` because it always takes the longest
     // match.
+    //
+    // Time (`ms`/`s`/`m`/`h`), memory (`Kb`/`Mb`/`Gb`) and angle (`deg`)
+    // specifiers, see "Базовые конструкции языка".
     time_interval: $ => /\d+(\.\d+)?(ms|s|m|h)/,
 
     size_specifier: $ => /\d+(\.\d+)?[KkMmGg]b/,
 
-    // Control flow, declarations and includes.
+    angle_specifier: $ => /\d+(\.\d+)?deg/,
+
+    // Declarations and control flow.
     control_keyword: $ => choice(
-      'if', 'else', 'for', 'while', 'do', 'switch',
-      'break', 'continue',
-      'include', 'test', 'macro', 'param', 'image',
-      'machine', 'flash', 'network',
+      // Declarations.
+      'machine', 'flash', 'network', 'param', 'image', 'test', 'macro',
+      'include',
+      // Conditions and loops.
+      'if', 'else', 'for', 'IN', 'RANGE', 'break', 'continue',
     ),
 
-    // Actions / built in commands.
+    // Actions / built in commands, including the sub-commands of `mouse`,
+    // `touch`, `ram`, `cpu`, `snapshot`, `plug`/`unplug` and the trailing
+    // modifiers (`timeout`, `interval`, `over`, `scale`, `with`, ...).
     action_keyword: $ => choice(
-      'wait', 'check', 'press', 'type', 'sleep', 'mouse', 'touch', 'exec',
-      'print', 'abort', 'screenshot', 'repl', 'remotefile', 'ram', 'cpu',
-      'battery', 'charging', 'lid', 'plug', 'unplug', 'start', 'stop',
-      'shutdown', 'snapshot', 'copyto', 'copyfrom', 'hold', 'release', 'step',
-      'timeout', 'interval', 'scroll', 'over', 'scale', 'with', 'as', 'expect',
-      'sizelimit',
+      // VM lifecycle.
+      'start', 'stop', 'shutdown', 'snapshot', 'repl', 'screenshot',
+      // Keyboard.
+      'press', 'hold', 'release', 'type',
+      // Mouse.
+      'mouse', 'move', 'click', 'lclick', 'rclick', 'dclick', 'lbtn', 'rbtn',
+      'wheel-up', 'wheel-down',
+      // Touch.
+      'touch', 'tap', 'doubletap', 'longpress', 'swipe', 'drag', 'pinchout',
+      'pinchin', 'twofingertap', 'twofingerswipe', 'rotate',
+      // Waiting and timing.
+      'wait', 'check', 'sleep', 'timeout', 'interval',
+      // Devices.
+      'plug', 'unplug', 'dvd', 'nic', 'link', 'hostdev', 'usb',
+      // Files and guest agent.
+      'exec', 'copyto', 'copyfrom', 'remotefile',
+      // VM resources.
+      'ram', 'cpu', 'battery', 'charging', 'lid', 'add', 'remove',
+      'create', 'revert',
+      // Output.
+      'print', 'abort', 'step',
+      // Modifiers.
+      'with', 'as', 'expect', 'sizelimit', 'over', 'scale', 'scroll',
+      'autoswitch', 'nocheck', 'active-window',
     ),
 
     // Select expressions: img / imgtag / ui / js
@@ -126,7 +161,7 @@ module.exports = grammar({
     comparison_keyword: $ => choice(
       'EQUAL', 'LESS', 'GREATER',
       'STREQUAL', 'STRMATCH', 'STRGREATER', 'STRLESS',
-      'RANGE', 'IN', 'DEFINED',
+      'DEFINED', 'EXIST',
     ),
 
     // Boolean / predicate operators.
@@ -138,6 +173,8 @@ module.exports = grammar({
 
     punctuation: $ => choice('(', ')', '[', ']', ',', ';', '.', ':'),
 
-    identifier: $ => /[A-Za-z_][A-Za-z0-9_]*/,
+    // Identifiers start with a latin letter or `_`; subsequent characters may
+    // also be digits or `-` (dash), e.g. `And_even-this233-`.
+    identifier: $ => /[A-Za-z_][A-Za-z0-9_-]*/,
   },
 });
