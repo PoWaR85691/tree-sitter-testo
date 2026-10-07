@@ -1,0 +1,41 @@
+{
+  "name": "tree-sitter-testo",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for the Testo language",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "testo",
+    "parser"
+  ],
+  "license": "MIT",
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "src/**"
+  ],
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.6"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.testo",
+      "file-types": [
+        "testo"
+      ]
+    }
+  ],
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test"
+  }
+}

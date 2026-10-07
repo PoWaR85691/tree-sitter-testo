@@ -1,0 +1,12 @@
+# Node / npm
+node_modules/
+
+# Build output
+build/
+*.node
+target/
+
+# Generated parser artefacts are committed on purpose (Zed compiles them),
+# so src/ is NOT ignored. Uncomment the next line if you prefer to generate
+# the parser during CI instead of committing it.
+# src/
